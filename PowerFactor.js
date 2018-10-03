@@ -192,10 +192,10 @@ var pfCalc = (function(){
 
         var hasApparentPower = !(typeof params.apparentPower === "undefined");
         var hasReactivePower = !(typeof params.reactivePower === "undefined");
-        var hasTruePower = !(typeof params.truePower === "undefined");
-        var hasPhaseAngle = !(typeof params.phaseAngle === "undefined");
-        var hasPhaseAngle = !(typeof params.phaseAngle === "undefined");
-        var hasLocation = !(typeof params.endLocation === "undefined");
+        var hasTruePower     = !(typeof params.truePower === "undefined");
+        var hasPhaseAngle    = !(typeof params.phaseAngle === "undefined");
+        var hasPhaseAngle    = !(typeof params.phaseAngle === "undefined");
+        var hasLocation      = !(typeof params.endLocation === "undefined");
 
         var prevLoad = _loads[_loads.length -1];
         var prevLocation = prevLoad.endLocation;
@@ -205,17 +205,16 @@ var pfCalc = (function(){
                 var prevX = prevLocation.x;
                 var prevY = prevLocation.y;
                 params.endLocation = new (_geom.point)(prevX + params.reactivePower, prevY + params.truePower);
-                console.log('created new endpoint')
             }
         }
 
-        console.log({
-            'hasApparentPower': hasApparentPower,
-            'hasReactivePower': hasReactivePower,
-            'hasTruePower': hasTruePower,
-            'hasPhaseAngle': hasPhaseAngle,
-            'hasLocation': hasLocation
-        })
+        // console.log({
+        //     'hasApparentPower': hasApparentPower,
+        //     'hasReactivePower': hasReactivePower,
+        //     'hasTruePower': hasTruePower,
+        //     'hasPhaseAngle': hasPhaseAngle,
+        //     'hasLocation': hasLocation
+        // })
 
         
         var newLoad = new _load(params.apparentPower, params.truePower, params.reactivePower, params.phaseAngle, params.endLocation);
