@@ -233,6 +233,8 @@ var pfCalc = (function(){
 
     return {
         init: _init,
+        geom: _geom,
+        plane: _plane,
         loads: _loads,
         appendLoad: _appendLoad
     }
