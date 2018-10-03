@@ -28,7 +28,7 @@ var pfCalc = (function(){
             line: line
         }
     })
-    var cartesianPlane = ( function (settings){
+    var cartesianPlane = ( function (){
         var canvas
         var ctx
         var ctxWidth
