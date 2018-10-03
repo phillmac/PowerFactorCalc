@@ -170,8 +170,6 @@ var pfCalc = (function(){
         }
     
     })
-    
-    geom = geometry();
 
     class load {
         constructor(){
@@ -219,6 +217,8 @@ var pfCalc = (function(){
 
     function _init(params) {
         settings = params;
+        geom = geometry();
+
         if (!typeof settings.ctnp === "undefined") {
             plane = cartesianPlane()
             plane.init(settings.ctnp)
