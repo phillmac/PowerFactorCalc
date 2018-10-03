@@ -35,9 +35,8 @@ var pfCalc = (function(){
         var ctxHeight
         var centerX
         var centerY
-        var unitPixels
         var settings
-        origin = new geometry.point(0,0)
+        var origin = new geometry.point(0,0)
 
         function init(params) {
             settings    = params
