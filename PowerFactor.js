@@ -145,7 +145,7 @@ var pfCalc = (function(){
         }
             
         function _drawPointXY(x,y){
-            oldFill = _ctx.fillStyle
+            var oldFill = _ctx.fillStyle
             _ctx.fillStyle = _settings.point.color;
             _ctx.fillRect(Math.round(x*_settings.unitPixels)+_centerX-4 , Math.round(y*_settings.unitPixels)+_centerY-4, _settings.point.size, _settings.point.size);
             _ctx.fillStyle = oldFill
@@ -153,10 +153,11 @@ var pfCalc = (function(){
 
         function _joinPoints(p1, p2) {
             var prevStyle = _ctx.strokeStyle
+            _ctx.beginPath();
+
             _ctx.strokeStyle = _settings.line.color
             _ctx.lineWidth = _settings.line.size
             
-            _ctx.beginPath();
             _ctx.moveTo(p1.x*_settings.unitScale-4, p1.y*_settings.unitScale-4);
             _ctx.lineTo(p2.x*_settings.unitScale-4, p2.y*_settings.unitScale-4);
             _ctx.stroke();
