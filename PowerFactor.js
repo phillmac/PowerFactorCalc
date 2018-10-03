@@ -199,7 +199,7 @@ var pfCalc = (function(){
             if(hasApparentPower && hasTruePower) {
                 var prevX = prevLocation.x;
                 var prevY = prevLocation.y;
-                loadParams.endLocation = new (_geom.point)(prevX + apparentPower, prevY + reactivePower);
+                endLocation = new (_geom.point)(prevX + apparentPower, prevY + reactivePower);
             }
         }
 
