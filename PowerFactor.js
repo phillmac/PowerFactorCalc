@@ -29,32 +29,35 @@ var pfCalc = (function(){
         }
     })
     var cartesianPlane = ( function (){
-        var canvas
-        var ctx
-        var ctxWidth
-        var ctxHeight
-        var centerX
-        var centerY
-        var settings
-        var origin = new geometry.point(0,0)
+        var _canvas
+        var _ctx
+        var _ctxWidth
+        var _ctxHeight
+        var _centerX
+        var _centerY
+        var _settings
+        var _origin = new point(0,0)
 
-        function init(params) {
-            settings    = params
-            canvas      = document.getElementById(settings.canvasID);
-            ctx         = canvas.getContext('2d');
-            ctxWidth    = canvas.getAttribute('width');
-            ctxHeight   = canvas.getAttribute('height');
-            centerX     = ctxWidth/2;
-            centerY     = ctxHeight/2;
-            unitPixels  = settings.unitPixels;
-
-            drawXaxis(ctxWidth, ctxHeight);
-            drawXscale(ctxWidth,settings.unitPixels);
-            drawYaxis(ctxWidth, ctxHeight);
-            drawYscale(ctxHeight, settings.unitPixels);
-
-            if (settings.drawOrigin)
-                drawPoint(origin)
+        function _init(params) {
+            _settings    = params
+            _canvas      = document.getElementById(_settings.canvasID);
+            _ctx         = _canvas.getContext('2d');
+            _ctxWidth    = _canvas.getAttribute('width');
+            _ctxHeight   = _canvas.getAttribute('height');
+            _centerX     = _ctxWidth/2;
+            _centerY     = _ctxHeight/2;
+            unitPixels  = _settings.unitPixels;
+            
+            if (_settings.draw.xAxis)
+                _drawXAxis(_ctxWidth, _ctxHeight);
+            if (_settings.draw.xScale)
+                _drawXScale(_ctxWidth,_settings.unitPixels);
+            if (_settings.draw.yAxis)
+                _drawYAxis(_ctxWidth, _ctxHeight);
+            if (_settings.draw.yScale)
+                _drawYScale(_ctxHeight, _settings.unitPixels);
+            if (_settings.draw.origin)
+                _drawPoint(_origin)
         }
 
         /*
@@ -63,14 +66,14 @@ var pfCalc = (function(){
         the draw distance for the axis lines.
         */
 
-        function drawXaxis(width, height) {
-            ctx.beginPath();
-            ctx.moveTo(0,height/2);
-            ctx.lineTo(width, height/2);
-            ctx.stroke();
+        function _drawXaxis(width, height) {
+            _ctx.beginPath();
+            _ctx.moveTo(0,height/2);
+            _ctx.lineTo(width, height/2);
+            _ctx.stroke();
         }
 
-        function drawXscale(width, scale) {
+        function _drawXScale(width, scale) {
             // Accumulator
             var unitScale = 0;
             
@@ -82,10 +85,10 @@ var pfCalc = (function(){
                     continue;
                 }
                 // Render commands
-                ctx.beginPath();
-                ctx.moveTo(unitScale,(width/2)+4);
-                ctx.lineTo(unitScale,(width/2)-4);
-                ctx.stroke();
+                _ctx.beginPath();
+                _ctx.moveTo(unitScale,(width/2)+4);
+                _ctx.lineTo(unitScale,(width/2)-4);
+                _ctx.stroke();
             }
             // Condition to check scale size to prevent overdraw?
             if (unitScale >= width) {
@@ -99,14 +102,14 @@ var pfCalc = (function(){
         the draw distance for the axis lines.
         */
 
-        function drawYaxis(width, height) {
-            ctx.beginPath();
-            ctx.moveTo(width/2,0);
-            ctx.lineTo(width/2,height);
-            ctx.stroke();
+        function _drawYAxis(width, height) {
+            _ctx.beginPath();
+            _ctx.moveTo(width/2,0);
+            _ctx.lineTo(width/2,height);
+            _ctx.stroke();
         }
 
-        function drawYscale(height, scale) {
+        function _drawYScale(height, scale) {
             // Accumulator
             var unitScale = 0;
             
@@ -118,10 +121,10 @@ var pfCalc = (function(){
                     continue;
                 }
                 // Render commands
-                ctx.beginPath();
-                ctx.moveTo((height/2)+4 , unitScale);
-                ctx.lineTo((height/2)-4, unitScale);
-                ctx.stroke();
+                _ctx.beginPath();
+                _ctx.moveTo((height/2)+4 , unitScale);
+                _ctx.lineTo((height/2)-4, unitScale);
+                _ctx.stroke();
             }
             // Condition to check scale size to prevent overdraw?
             if (unitScale >= height) {
@@ -129,25 +132,25 @@ var pfCalc = (function(){
             }
         }
 
-        function drawPoint(p){
+        function _drawPoint(p){
             drawPointXY(p.x, p.y)
         }
             
         function drawPointXY(x,y){
-            oldFill = ctx.fillStyle
-            ctx.fillStyle = settings.point.color;
-            ctx.fillRect(Math.round(x*settings.unitPixels)+centerX-4 , Math.round(y*settings.unitPixels)+centerY-4, settngs.point.size, settngs.point.size);
-            ctx.fillStyle = oldFill
+            oldFill = _ctx.fillStyle
+            _ctx.fillStyle = _settings.point.color;
+            _ctx.fillRect(Math.round(x*_settings.unitPixels)+_centerX-4 , Math.round(y*_settings.unitPixels)+_centerY-4, settngs.point.size, settngs.point.size);
+            _ctx.fillStyle = oldFill
         }
 
 
         return {
-            init: init,
-            ctxWidth: ctxWidth,
-            ctxHeight: ctxHeight,
-            centerX: centerX,
-            centerY: centerY,
-            drawPoint: drawPoint
+            init: _init,
+            ctxWidth: _ctxWidth,
+            ctxHeight: _ctxHeight,
+            centerX: _centerX,
+            centerY: _centerY,
+            drawPoint: _drawPoint
         }
     
     })
