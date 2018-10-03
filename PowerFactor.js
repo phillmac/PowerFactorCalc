@@ -177,38 +177,35 @@ var pfCalc = (function(){
             this.truePower = null;
             this.reactivePower = null;
             this.phaseAngle = null;
-            this.location = null;
+            this.endLocation = null;
         }
     }
 
-    var _addLoad = (function(loadParams){
+    var _appendLoad = (function(loadParams){
 
         var hasApparentPower = !(typeof loadParams.apparentPower === "undefined");
         var hasTruePower = !(typeof loadParams.truePower === "undefined");
         var hasReactivePower = !(typeof loadParams.reactivePower === "undefined");
         var hasPhaseAngle = !(typeof loadParams.phaseAngle === "undefined");
         var hasPhaseAngle = !(typeof loadParams.phaseAngle === "undefined");
-        var hasLocation = !(typeof loadParams.location === "undefined");
+        var hasLocation = !(typeof loadParams.Endlocation === "undefined");
 
         var prevLoad = loads[loads.length -1];
-        var prevLocation = prevLoad.location;
-
-
-
+        var prevLocation = prevLoad.Endlocation;
 
         if (!hasLocation){
             if(hasApparentPower && hasTruePower) {
                 var prevX = prevLocation.x;
                 var prevY = prevLocation.y;
-                loadParams.location = new (geom.point)(prevX + loadParams.apparentPower, prevY + loadParams.truePower);
+                loadParams.Endlocation = new (geom.point)(prevX + loadParams.apparentPower, prevY + loadParams.truePower);
             }
         }
 
         
         var newLoad = new load(loadParams);
-        var newLocation = newLoad.location;
+        var newLocation = newLoad.endLocation;
     
-        plane.drawPoint(newLoad.location);
+        plane.drawPoint(newLoad.endLocation);
         plane.joinPoints(prevLocation, newLocation);
 
         loads.push(newLoad);
@@ -224,12 +221,20 @@ var pfCalc = (function(){
             plane.init(settings.ctnp);
         }
 
+        loads.push(new load({
+            apparentPower: 0.0,
+            truePower: 0.0,
+            reactivePower: 0.0,
+            phaseAngle: 0.0,
+            endLocation = new (geom.point)(0,0)
+        }))
+
     }
 
     return {
         init: _init,
         load: load,
-        addLoad: _addLoad
+        appendLoad: _appendLoad
     }
 
 
