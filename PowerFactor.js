@@ -235,6 +235,7 @@ var pfCalc = (function(){
         init: _init,
         geom: _geom,
         plane: _plane,
+        load: load,
         loads: _loads,
         appendLoad: _appendLoad
     }
