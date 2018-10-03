@@ -205,19 +205,9 @@ var pfCalc = (function(){
                 var prevX = prevLocation.x;
                 var prevY = prevLocation.y;
                 params.endLocation = new (_geom.point)(prevX + params.reactivePower, prevY + params.truePower);
-                conol.log('created new endpoint')
             }
         }
-
-        console.log({
-            'hasApparentPower': hasApparentPower,
-            'hasReactivePower': hasReactivePower,
-            'hasTruePower': hasTruePower,
-            'hasPhaseAngle': hasPhaseAngle,
-            'hasLocation': hasLocation
-        })
-
-        
+       
         var newLoad = new _load(params.apparentPower, params.truePower, params.reactivePower, params.phaseAngle, params.endLocation);
         var newLocation = newLoad.endLocation;
     
