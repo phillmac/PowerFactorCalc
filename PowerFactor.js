@@ -190,7 +190,7 @@ var pfCalc = (function(){
         var hasPhaseAngle = !(typeof loadParams.phaseAngle === "undefined");
         var hasLocation = !(typeof loadParams.endLocation === "undefined");
 
-        var prevLoad = loads[loads.length -1];
+        var prevLoad = _loads[_loads.length -1];
         var prevLocation = prevLoad.endLocation;
 
         if (!hasLocation){
@@ -221,7 +221,7 @@ var pfCalc = (function(){
             _plane.init(settings.ctnp);
         }
 
-        loads.push(new load({
+        _loads.push(new load({
             apparentPower: 0.0,
             truePower: 0.0,
             reactivePower: 0.0,
