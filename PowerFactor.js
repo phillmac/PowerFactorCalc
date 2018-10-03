@@ -153,9 +153,9 @@ var pfCalc = (function(){
 
         function _joinPoints(p1, p2) {
             var prevStyle = _ctx.strokeStyle
-            _ctx.strokeStyle = settings.line.color
-            _ctx.moveTo(p1.x*settings.unitScale-4, p1.y*settings.unitScale-4);
-            _ctx.lineTo(p2.x*settings.unitScale-4, p2.y*settings.unitScale-4);
+            _ctx.strokeStyle = _settings.line.color
+            _ctx.moveTo(p1.x*_settings.unitScale-4, p1.y*_settings.unitScale-4);
+            _ctx.lineTo(p2.x*_settings.unitScale-4, p2.y*_settings.unitScale-4);
             _ctx.stroke();
             _ctx.strokeStyle = prevStyle
         }
