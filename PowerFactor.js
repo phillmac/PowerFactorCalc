@@ -1,7 +1,6 @@
 var pfCalc = (function(){
     var _settings;
-    var _geom = _geometry();
-    var _plane = cartesianPlane();
+
     var _loads = [];
     var _geometry = (function(){
         class point {
@@ -170,6 +169,9 @@ var pfCalc = (function(){
         }
     
     })
+
+    var _geom = _geometry();
+    var _plane = cartesianPlane();
 
     class load {
         constructor(apparentPower, truePower, reactivePower, phaseAngle, endLocation){
