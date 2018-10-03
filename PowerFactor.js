@@ -139,7 +139,7 @@ var pfCalc = (function(){
         function drawPointXY(x,y){
             oldFill = _ctx.fillStyle
             _ctx.fillStyle = _settings.point.color;
-            _ctx.fillRect(Math.round(x*_settings.unitPixels)+_centerX-4 , Math.round(y*_settings.unitPixels)+_centerY-4, settngs.point.size, settngs.point.size);
+            _ctx.fillRect(Math.round(x*_settings.unitPixels)+_centerX-4 , Math.round(y*_settings.unitPixels)+_centerY-4, _settings.point.size, _settings.point.size);
             _ctx.fillStyle = oldFill
         }
 
