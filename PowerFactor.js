@@ -66,7 +66,7 @@ var pfCalc = (function(){
         the draw distance for the axis lines.
         */
 
-        function _drawXaxis(width, height) {
+        function _drawXAxis(width, height) {
             _ctx.beginPath();
             _ctx.moveTo(0,height/2);
             _ctx.lineTo(width, height/2);
