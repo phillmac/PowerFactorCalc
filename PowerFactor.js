@@ -158,9 +158,9 @@ var pfCalc = (function(){
     }
 
     return {
-        csp: cartesianPlane,
+        ctnp: cartesianPlane,
         geom: geometry,
-        pf: powerFactor
+        pwfr: powerFactor
     }
 
 
