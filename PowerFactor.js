@@ -219,8 +219,8 @@ var pfCalc = (function(){
     function _init(params) {
         _settings = params;
 
-        if (!(typeof settings.ctnp === "undefined")) {
-            _plane.init(settings.ctnp);
+        if (!(typeof settings.plane === "undefined")) {
+            _plane.init(settings.plane);
         }
 
         _loads.push(new _load(
