@@ -188,14 +188,14 @@ var pfCalc = (function(){
         }
     }
 
-    var _appendLoad = (function(apparentPower, truePower, reactivePower, phaseAngle, endLocation){
+    var _appendLoad = (function(values){
 
-        var hasApparentPower = !(typeof apparentPower === "undefined");
-        var hasTruePower = !(typeof truePower === "undefined");
-        var hasReactivePower = !(typeof reactivePower === "undefined");
-        var hasPhaseAngle = !(typeof phaseAngle === "undefined");
-        var hasPhaseAngle = !(typeof phaseAngle === "undefined");
-        var hasLocation = !(typeof endLocation === "undefined");
+        var hasApparentPower = !(typeof values.apparentPower === "undefined");
+        var hasTruePower = !(typeof values.truePower === "undefined");
+        var hasReactivePower = !(typeof values.reactivePower === "undefined");
+        var hasPhaseAngle = !(typeof values.phaseAngle === "undefined");
+        var hasPhaseAngle = !(typeof values.phaseAngle === "undefined");
+        var hasLocation = !(typeof values.endLocation === "undefined");
 
         var prevLoad = _loads[_loads.length -1];
         var prevLocation = prevLoad.endLocation;
@@ -204,12 +204,12 @@ var pfCalc = (function(){
             if(hasApparentPower && hasTruePower) {
                 var prevX = prevLocation.x;
                 var prevY = prevLocation.y;
-                endLocation = new (_geom.point)(prevX + apparentPower, prevY + reactivePower);
+                endLocation = new (_geom.point)(prevX + values.apparentPower, prevY + values.reactivePower);
             }
         }
 
         
-        var newLoad = new _load(apparentPower, truePower, reactivePower, phaseAngle, endLocation);
+        var newLoad = new _load(values.apparentPower, values.truePower, values.reactivePower, values.phaseAngle, values.endLocation);
         var newLocation = newLoad.endLocation;
     
         _plane.drawPoint(newLoad.endLocation);
