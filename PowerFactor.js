@@ -191,8 +191,8 @@ var pfCalc = (function(){
     var _appendLoad = (function(params){
 
         var hasApparentPower = !(typeof params.apparentPower === "undefined");
-        var hasTruePower = !(typeof params.truePower === "undefined");
         var hasReactivePower = !(typeof params.reactivePower === "undefined");
+        var hasTruePower = !(typeof params.truePower === "undefined");
         var hasPhaseAngle = !(typeof params.phaseAngle === "undefined");
         var hasPhaseAngle = !(typeof params.phaseAngle === "undefined");
         var hasLocation = !(typeof params.endLocation === "undefined");
@@ -201,12 +201,20 @@ var pfCalc = (function(){
         var prevLocation = prevLoad.endLocation;
 
         if (!hasLocation){
-            if(hasApparentPower && hasReactivePower) {
+            if(hasReactivePower && hasTruePower) {
                 var prevX = prevLocation.x;
                 var prevY = prevLocation.y;
-                endLocation = new (_geom.point)(prevX + params.apparentPower, prevY + params.reactivePower);
+                endLocation = new (_geom.point)(prevX + params.reactivePower, prevY + params.truePower);
             }
         }
+
+        console.log({
+            'hasApparentPower': hasApparentPower,
+            'hasReactivePower': hasReactivePower,
+            'hasTruePower': hasTruePower,
+            'hasPhaseAngle': hasPhaseAngle,
+            'hasLocation': hasLocation
+        })
 
         
         var newLoad = new _load(params.apparentPower, params.truePower, params.reactivePower, params.phaseAngle, params.endLocation);
