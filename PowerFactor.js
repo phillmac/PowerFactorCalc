@@ -204,7 +204,8 @@ var pfCalc = (function(){
             if(hasReactivePower && hasTruePower) {
                 var prevX = prevLocation.x;
                 var prevY = prevLocation.y;
-                endLocation = new (_geom.point)(prevX + params.reactivePower, prevY + params.truePower);
+                params.endLocation = new (_geom.point)(prevX + params.reactivePower, prevY + params.truePower);
+                conol.log('created new endpoint')
             }
         }
 
