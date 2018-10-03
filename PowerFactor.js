@@ -172,7 +172,7 @@ var pfCalc = (function(){
     })
 
     class load {
-        /* constructor(){
+        /* constructor(apparentPower, truePower, reactivePower, phaseAngle, endLocation){
             this.apparentPower = apparentPower;
             this.truePower = truePower;
             this.reactivePower = reactivePower;
