@@ -152,7 +152,7 @@ var pfCalc = (function(){
         }
 
         function _joinPoints(p1, p2) {
-            console.log("drawing line from (${p1.x},${p1.y}) to (${p2.x}, ${p2.y)")
+            console.log("drawing line from (" + p1.x + "," + p1.y + ") to (" + p2.x + "," + p2.y + ")")
             var prevStyle = _ctx.strokeStyle
             _ctx.beginPath();
 
