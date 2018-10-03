@@ -194,7 +194,6 @@ var pfCalc = (function(){
         var hasReactivePower = !(typeof params.reactivePower === "undefined");
         var hasTruePower     = !(typeof params.truePower === "undefined");
         var hasPhaseAngle    = !(typeof params.phaseAngle === "undefined");
-        var hasPhaseAngle    = !(typeof params.phaseAngle === "undefined");
         var hasLocation      = !(typeof params.endLocation === "undefined");
 
         var prevLoad = _loads[_loads.length -1];
