@@ -1,7 +1,7 @@
 var pfCalc = (function(){
     var _settings;
-    var _plane;
-    var _geom;
+    var _geom = _geometry();
+    var _plane = cartesianPlane();
     var _loads = [];
     var _geometry = (function(){
         class point {
@@ -214,10 +214,8 @@ var pfCalc = (function(){
 
     function _init(params) {
         _settings = params;
-        _geom = _geometry();
 
         if (!(typeof settings.ctnp === "undefined")) {
-            _plane = cartesianPlane();
             _plane.init(settings.ctnp);
         }
 
@@ -233,7 +231,7 @@ var pfCalc = (function(){
 
     return {
         init: _init,
-        geom: _geom,
+        geom: (_geom,
         plane: _plane,
         loads: _loads,
         appendLoad: _appendLoad
