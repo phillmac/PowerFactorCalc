@@ -226,7 +226,7 @@ var pfCalc = (function(){
             truePower: 0.0,
             reactivePower: 0.0,
             phaseAngle: 0.0,
-            endLocation = new (geom.point)(0,0)
+            endLocation: new (geom.point)(0,0)
         }))
 
     }
