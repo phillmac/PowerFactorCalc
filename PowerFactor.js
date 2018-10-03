@@ -173,7 +173,7 @@ var pfCalc = (function(){
     var _geom = _geometry();
     var _plane = cartesianPlane();
 
-    class load {
+    class _load {
         constructor(apparentPower, truePower, reactivePower, phaseAngle, endLocation){
             this.apparentPower = apparentPower;
             this.truePower = truePower;
@@ -204,7 +204,7 @@ var pfCalc = (function(){
         }
 
         
-        var newLoad = new load(loadParams);
+        var newLoad = new _load(loadParams);
         var newLocation = newLoad.endLocation;
     
         _plane.drawPoint(newLoad.endLocation);
@@ -221,7 +221,7 @@ var pfCalc = (function(){
             _plane.init(settings.ctnp);
         }
 
-        _loads.push(new load({
+        _loads.push(new _load({
             apparentPower: 0.0,
             truePower: 0.0,
             reactivePower: 0.0,
@@ -235,7 +235,7 @@ var pfCalc = (function(){
         init: _init,
         geom: _geom,
         plane: _plane,
-        load: load,
+        load: _load,
         loads: _loads,
         appendLoad: _appendLoad
     }
