@@ -48,16 +48,21 @@ var pfCalc = (function(){
             _centerY     = _ctxHeight/2;
             unitPixels  = _settings.unitPixels;
             
-            if (_settings.draw.xAxis)
+            if (_settings.draw.xAxis){
                 _drawXAxis(_ctxWidth, _ctxHeight);
-            if (_settings.draw.xScale)
+            }
+            if (_settings.draw.xScale){
                 _drawXScale(_ctxWidth,_settings.unitPixels);
-            if (_settings.draw.yAxis)
+            }
+            if (_settings.draw.yAxis) {
                 _drawYAxis(_ctxWidth, _ctxHeight);
-            if (_settings.draw.yScale)
+            }
+            if (_settings.draw.yScale){
                 _drawYScale(_ctxHeight, _settings.unitPixels);
-            if (_settings.draw.origin)
+            }
+            if (_settings.draw.origin){
                 _drawPoint(_origin)
+            }
         }
 
         /*
