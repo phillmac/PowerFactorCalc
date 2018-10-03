@@ -36,7 +36,7 @@ var pfCalc = (function(){
         var _centerX
         var _centerY
         var _settings
-        var _origin = new point(0,0)
+        var _origin = new pfCalc().geom().point(0,0)
 
         function _init(params) {
             _settings    = params
