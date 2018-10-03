@@ -219,7 +219,7 @@ var pfCalc = (function(){
         settings = params;
         geom = geometry();
 
-        if (!(typeof settings.ctnp === "undefined") {
+        if (!(typeof settings.ctnp === "undefined")) {
             plane = cartesianPlane();
             plane.init(settings.ctnp);
         }
