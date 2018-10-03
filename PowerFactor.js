@@ -167,6 +167,7 @@ var pfCalc = (function(){
 
         return {
             init: _init,
+            ctx: _ctx,
             ctxWidth: _ctxWidth,
             ctxHeight: _ctxHeight,
             centerX: _centerX,
