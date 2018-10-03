@@ -188,16 +188,16 @@ var pfCalc = (function(){
         var hasReactivePower = !(typeof loadParams.reactivePower === "undefined");
         var hasPhaseAngle = !(typeof loadParams.phaseAngle === "undefined");
         var hasPhaseAngle = !(typeof loadParams.phaseAngle === "undefined");
-        var hasLocation = !(typeof loadParams.Endlocation === "undefined");
+        var hasLocation = !(typeof loadParams.endLocation === "undefined");
 
         var prevLoad = loads[loads.length -1];
-        var prevLocation = prevLoad.Endlocation;
+        var prevLocation = prevLoad.endLocation;
 
         if (!hasLocation){
             if(hasApparentPower && hasTruePower) {
                 var prevX = prevLocation.x;
                 var prevY = prevLocation.y;
-                loadParams.Endlocation = new (geom.point)(prevX + loadParams.apparentPower, prevY + loadParams.reactivePower);
+                loadParams.endLocation = new (geom.point)(prevX + loadParams.apparentPower, prevY + loadParams.reactivePower);
             }
         }
 
