@@ -1,4 +1,8 @@
 var pfCalc = (function(){
+    var settings;
+    var plane
+    var geom = geometry();
+    var loads = [];
     var geometry = (function(){
         class point {
             constructor(x,y) {
@@ -36,7 +40,7 @@ var pfCalc = (function(){
         var _centerX
         var _centerY
         var _settings
-        var _origin = new (pfCalc().geom().point)(0,0)
+        var _origin = new (geom.point)(0,0)
 
         function _init(params) {
             _settings    = params
@@ -138,16 +142,22 @@ var pfCalc = (function(){
         }
 
         function _drawPoint(p){
-            drawPointXY(p.x, p.y)
+            _drawPointXY(p.x, p.y)
         }
             
-        function drawPointXY(x,y){
+        function _drawPointXY(x,y){
             oldFill = _ctx.fillStyle
             _ctx.fillStyle = _settings.point.color;
             _ctx.fillRect(Math.round(x*_settings.unitPixels)+_centerX-4 , Math.round(y*_settings.unitPixels)+_centerY-4, _settings.point.size, _settings.point.size);
             _ctx.fillStyle = oldFill
         }
 
+        function _joinPoints(p1, p2) {
+            _ctx.beginPath();
+            _ctx.moveTo(p1.x, p1.y);
+            _ctx.lineTo(p2.x, p2.y);
+            _ctx.stroke();
+        }
 
         return {
             init: _init,
@@ -155,20 +165,67 @@ var pfCalc = (function(){
             ctxHeight: _ctxHeight,
             centerX: _centerX,
             centerY: _centerY,
-            drawPoint: _drawPoint
+            drawPoint: _drawPoint,
+            joinPoints: _joinPoints
         }
     
     })
 
+    class load {
+        apparentPower;
+        truePower;
+        reactivePower;
+        phaseAngle;
+        location;
+    }
 
-    class powerFactor {
+    var _addLoad = (function(loadParams){
+
+        var hasApparentPower = !(typeof loadParams.apparentPower === "undefined")
+        var hasTruePower = !(typeof loadParams.truePower === "undefined")
+        var hasReactivePower = !(typeof loadParams.reactivePower === "undefined")
+        var hasPhaseAngle = !(typeof loadParams.phaseAngle === "undefined")
+        var hasPhaseAngle = !(typeof loadParams.phaseAngle === "undefined")
+        var hasLocation = !(typeof loadParams.location === "undefined")
+
+        var prevLoad = loads[loads.length -1]
+        var prevLocation = prevLoad.location
+
+
+
+
+        if (!hasLocation){
+            if(hasApparentPower && hasTruePower) {
+                var prevX = prevLocation.x
+                var prevY = prevLocation.y
+                loadParams.location = new (geom.point)(prevX + loadParams.apparentPower, prevY + loadParams.truePower)
+            }
+        }
+
+        
+        var newLoad = new load(loadParams)
+        var newLocation = newLoad.location
+    
+        plane.drawPoint(newLoad.location)
+        plane.joinPoints(prevLocation, newLocation)
+
+        loads.push(newLoad)
+
+    })
+
+    function _init(params) {
+        settings = params;
+        if (!typeof settings.ctnp === "undefined") {
+            plane = cartesianPlane()
+            plane.init(settings.ctnp)
+        }
 
     }
 
     return {
-        ctnp: cartesianPlane,
-        geom: geometry,
-        pwfr: powerFactor
+        init: _init,
+        load: load,
+        addLoad: _addLoad
     }
 
 

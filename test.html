@@ -1,22 +1,24 @@
 <canvas id="canvas" width="1000" height="1000"></canvas>
 <script type="text/javascript" src="https://phillmac.github.io/PowerFactorCalc/PowerFactor.js"></script>
 <script type="text/javascript">
-    var ctnpSettings = {
-        canvasID: 'canvas',
-        unitPixels: 10,
-        draw: {
-            xAxis: true,
-            yAxis: true,
-            xScale: true,
-            yScale: true,
-            origin: true
-        },
-        point: {
-            color: '#FF0000',
-            size: 10
+    var settings = {
+        ctnp: {
+            canvasID: 'canvas',
+            unitPixels: 10,
+            draw: {
+                xAxis: true,
+                yAxis: true,
+                xScale: true,
+                yScale: true,
+                origin: false
+            },
+            point: {
+                color: '#FF0000',
+                size: 10
+            }
         }
     }
-    var pfctnp= pfCalc().ctnp();
-    pfctnp.init(ctnpSettings)
+    var calc = pfCalc()
+    calc.init(settings)
 
 </script>
