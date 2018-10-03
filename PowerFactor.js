@@ -1,7 +1,7 @@
 var pfCalc = (function(){
     var settings;
     var plane
-    var geom = geometry();
+    var geom
     var loads = [];
     var geometry = (function(){
         class point {
@@ -170,6 +170,8 @@ var pfCalc = (function(){
         }
     
     })
+    
+    geom = geometry();
 
     class load {
         constructor(){
