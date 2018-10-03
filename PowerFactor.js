@@ -188,14 +188,14 @@ var pfCalc = (function(){
         }
     }
 
-    var _appendLoad = (function(values){
+    var _appendLoad = (function(params){
 
-        var hasApparentPower = !(typeof values.apparentPower === "undefined");
-        var hasTruePower = !(typeof values.truePower === "undefined");
-        var hasReactivePower = !(typeof values.reactivePower === "undefined");
-        var hasPhaseAngle = !(typeof values.phaseAngle === "undefined");
-        var hasPhaseAngle = !(typeof values.phaseAngle === "undefined");
-        var hasLocation = !(typeof values.endLocation === "undefined");
+        var hasApparentPower = !(typeof params.apparentPower === "undefined");
+        var hasTruePower = !(typeof params.truePower === "undefined");
+        var hasReactivePower = !(typeof params.reactivePower === "undefined");
+        var hasPhaseAngle = !(typeof params.phaseAngle === "undefined");
+        var hasPhaseAngle = !(typeof params.phaseAngle === "undefined");
+        var hasLocation = !(typeof params.endLocation === "undefined");
 
         var prevLoad = _loads[_loads.length -1];
         var prevLocation = prevLoad.endLocation;
@@ -204,12 +204,12 @@ var pfCalc = (function(){
             if(hasApparentPower && hasTruePower) {
                 var prevX = prevLocation.x;
                 var prevY = prevLocation.y;
-                endLocation = new (_geom.point)(prevX + values.apparentPower, prevY + values.reactivePower);
+                endLocation = new (_geom.point)(prevX + params.apparentPower, prevY + params.reactivePower);
             }
         }
 
         
-        var newLoad = new _load(values.apparentPower, values.truePower, values.reactivePower, values.phaseAngle, values.endLocation);
+        var newLoad = new _load(params.apparentPower, params.truePower, params.reactivePower, params.phaseAngle, params.endLocation);
         var newLocation = newLoad.endLocation;
     
         _plane.drawPoint(newLoad.endLocation);
@@ -226,12 +226,7 @@ var pfCalc = (function(){
             _plane.init(settings.plane);
         }
 
-        _loads.push(new _load(
-            apparentPower =  0.0,
-            truePower =  0.0,
-            reactivePower = 0.0,
-            phaseAngle = 0.0,
-            endLocation = new (_geom.point)(0,0)
+        _loads.push(new _load(0.0, 0.0, 0.0,0.0,new (_geom.point)(0,0)
         ))
 
     }
