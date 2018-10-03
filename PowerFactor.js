@@ -174,10 +174,10 @@ var pfCalc = (function(){
     class load {
         constructor(){
             this.apparentPower = null;
-            truePower = null;
-            reactivePower = null;
-            phaseAngle = null;
-            location = null;
+            this.truePower = null;
+            this.reactivePower = null;
+            this.phaseAngle = null;
+            this.location = null;
         }
     }
 
