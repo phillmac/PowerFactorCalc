@@ -201,7 +201,7 @@ var pfCalc = (function(){
         var prevLocation = prevLoad.endLocation;
 
         if (!hasLocation){
-            if(hasApparentPower && hasTruePower) {
+            if(hasApparentPower && hasReactivePower) {
                 var prevX = prevLocation.x;
                 var prevY = prevLocation.y;
                 endLocation = new (_geom.point)(prevX + params.apparentPower, prevY + params.reactivePower);
@@ -226,7 +226,7 @@ var pfCalc = (function(){
             _plane.init(settings.plane);
         }
 
-        _loads.push(new _load(0.0, 0.0, 0.0,0.0, new (_geom.point)(0,0)))
+        _loads.push(new _load(0.0, 0.0, 0.0, 0.0, new (_geom.point)(0,0)))
 
     }
 
