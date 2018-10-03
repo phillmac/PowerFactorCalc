@@ -1,7 +1,7 @@
 var pfCalc = (function(){
     var settings;
-    var plane
-    var geom
+    var plane;
+    var geom;
     var loads = [];
     var geometry = (function(){
         class point {
@@ -183,35 +183,35 @@ var pfCalc = (function(){
 
     var _addLoad = (function(loadParams){
 
-        var hasApparentPower = !(typeof loadParams.apparentPower === "undefined")
-        var hasTruePower = !(typeof loadParams.truePower === "undefined")
-        var hasReactivePower = !(typeof loadParams.reactivePower === "undefined")
-        var hasPhaseAngle = !(typeof loadParams.phaseAngle === "undefined")
-        var hasPhaseAngle = !(typeof loadParams.phaseAngle === "undefined")
-        var hasLocation = !(typeof loadParams.location === "undefined")
+        var hasApparentPower = !(typeof loadParams.apparentPower === "undefined");
+        var hasTruePower = !(typeof loadParams.truePower === "undefined");
+        var hasReactivePower = !(typeof loadParams.reactivePower === "undefined");
+        var hasPhaseAngle = !(typeof loadParams.phaseAngle === "undefined");
+        var hasPhaseAngle = !(typeof loadParams.phaseAngle === "undefined");
+        var hasLocation = !(typeof loadParams.location === "undefined");
 
-        var prevLoad = loads[loads.length -1]
-        var prevLocation = prevLoad.location
+        var prevLoad = loads[loads.length -1];
+        var prevLocation = prevLoad.location;
 
 
 
 
         if (!hasLocation){
             if(hasApparentPower && hasTruePower) {
-                var prevX = prevLocation.x
-                var prevY = prevLocation.y
-                loadParams.location = new (geom.point)(prevX + loadParams.apparentPower, prevY + loadParams.truePower)
+                var prevX = prevLocation.x;
+                var prevY = prevLocation.y;
+                loadParams.location = new (geom.point)(prevX + loadParams.apparentPower, prevY + loadParams.truePower);
             }
         }
 
         
-        var newLoad = new load(loadParams)
-        var newLocation = newLoad.location
+        var newLoad = new load(loadParams);
+        var newLocation = newLoad.location;
     
-        plane.drawPoint(newLoad.location)
-        plane.joinPoints(prevLocation, newLocation)
+        plane.drawPoint(newLoad.location);
+        plane.joinPoints(prevLocation, newLocation);
 
-        loads.push(newLoad)
+        loads.push(newLoad);
 
     })
 
@@ -219,9 +219,9 @@ var pfCalc = (function(){
         settings = params;
         geom = geometry();
 
-        if (!typeof settings.ctnp === "undefined") {
-            plane = cartesianPlane()
-            plane.init(settings.ctnp)
+        if (!(typeof settings.ctnp === "undefined") {
+            plane = cartesianPlane();
+            plane.init(settings.ctnp);
         }
 
     }
