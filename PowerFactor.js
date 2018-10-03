@@ -152,15 +152,20 @@ var pfCalc = (function(){
         }
 
         function _joinPoints(p1, p2) {
-            console.log("drawing line from (" + p1.x + "," + p1.y + ") to (" + p2.x + "," + p2.y + ")")
+            var p1x = Math.round((p1.x*_settings.unitScale)) -4
+            var p1y = Math.round((p1.y*_settings.unitScale)) -4
+            var p2x = Math.round((p2.x*_settings.unitScale)) -4
+            var p2y = Math.round((p2.y*_settings.unitScale)) -4
+
+            console.log("drawing line from (" + p1x + "," + p1y + ") to (" + p2x + "," + p2y + ")")
             var prevStyle = _ctx.strokeStyle
             _ctx.beginPath();
 
             _ctx.strokeStyle = _settings.line.color
             _ctx.lineWidth = _settings.line.size
             
-            _ctx.moveTo(p1.x*_settings.unitScale-4, p1.y*_settings.unitScale-4);
-            _ctx.lineTo(p2.x*_settings.unitScale-4, p2.y*_settings.unitScale-4);
+            _ctx.moveTo(p1x, p1y);
+            _ctx.lineTo(p2x, p2y);
             _ctx.stroke();
             
             _ctx.strokeStyle = prevStyle
