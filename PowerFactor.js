@@ -221,13 +221,13 @@ var pfCalc = (function(){
             _plane.init(settings.ctnp);
         }
 
-        _loads.push(new _load({
-            apparentPower: 0.0,
-            truePower: 0.0,
-            reactivePower: 0.0,
-            phaseAngle: 0.0,
-            endLocation: new (_geom.point)(0,0)
-        }))
+        _loads.push(new _load(
+            apparentPower =  0.0,
+            truePower =  0.0,
+            reactivePower = 0.0,
+            phaseAngle = 0.0,
+            endLocation = new (_geom.point)(0,0)
+        ))
 
     }
 
