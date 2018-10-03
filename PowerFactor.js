@@ -157,7 +157,6 @@ var pfCalc = (function(){
             var p2x = Math.round(p2.x*_settings.unitPixels)+_centerX
             var p2y = Math.round(p2.y*_settings.unitPixels)+_centerY
 
-            console.log("drawing line from (" + p1x + "," + p1y + ") to (" + p2x + "," + p2y + ")")
             var prevStyle = _ctx.strokeStyle
             _ctx.beginPath();
 
