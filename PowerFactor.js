@@ -152,10 +152,12 @@ var pfCalc = (function(){
         }
 
         function _joinPoints(p1, p2) {
-            _ctx.beginPath();
-            _ctx.moveTo(p1.x, p1.y);
-            _ctx.lineTo(p2.x, p2.y);
+            var prevStyle = _ctx.strokeStyle
+            _ctx.strokeStyle = settings.line.color
+            _ctx.moveTo(p1.x*settings.unitScale-4, p1.y*settings.unitScale-4);
+            _ctx.lineTo(p2.x*settings.unitScale-4, p2.y*settings.unitScale-4);
             _ctx.stroke();
+            _ctx.strokeStyle = prevStyle
         }
 
         return {
