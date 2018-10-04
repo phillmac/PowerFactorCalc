@@ -259,7 +259,7 @@ var pfCalc = (function(){
                     return !this.params.hasEndLocation();
                 },
                 function() {
-                    return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive power & true power
+                    return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive & true power
                 },
                 function() {
                     this.params.values.endLocation = new (_geom.point)(this.params.prevX + this.params.values.reactivePower, this.params.prevY + this.params.values.truePower);
@@ -270,12 +270,12 @@ var pfCalc = (function(){
                     return !this.params.hasPowerFactor();
                 },
                 function() {
-                    return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive power & true power
+                    return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive & true power
                 },
                 function() {
                     this.params.values.powerFactor = this.params.values.reactivePower/this.params.values.truePower;
                 }
-            ), new _calculation(    'Atan to get phase angle from power factor',
+            ), new _calculation(    'ATan to get phase angle from power factor',
                 params,
                 function() {
                     return !this.params.hasPhaseAngle();
@@ -286,9 +286,23 @@ var pfCalc = (function(){
                 function() {
                     this.params.values.phaseAngle = Math.atan(this.params.values.powerFactor) * (180/Math.PI);
                 }
-            ),
+            ), new _calculation(    'Pythagoras to get apparent power from true & reactive',
+                params,
+                function() {
+                    return !this.params.hasApparentPower();
+                },
+                function() {
+                    return this.params.hasReactivePower() && this.params.hasTruePower();  //Require reactive & true power
+                },
+                function() {
+                    this.params.values.apparentPower = Math.sqrt(Math.pow(this.params.values.reactivePower, 2) + Math.pow(this.params.values.truePower, 2));
+                }
+             ),
         ]
     }
+
+
+    
 
     var _appendLoad = (function(values){
 
@@ -364,8 +378,8 @@ var pfCalc = (function(){
     function _init(params) {
         _settings = params;
 
-        if (!(typeof settings.plane === "undefined")) {
-            _plane.init(settings.plane);
+        if (!(typeof _settings.plane === "undefined")) {
+            _plane.init(_settings.plane);
         }
 
         _loads.push(new _load(0.0, 0.0, 0.0, 0.0, new (_geom.point)(0,0)))
