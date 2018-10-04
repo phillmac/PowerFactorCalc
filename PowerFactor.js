@@ -147,14 +147,14 @@ var pfCalc = (function(){
         function _drawPointXY(x,y){
             var oldFill = _ctx.fillStyle
             _ctx.fillStyle = _settings.point.color;
-            _ctx.fillRect(_centerX - Math.round(x*_settings.unitPixels) -4 , _centerY - Math.round(y*_settings.unitPixels)-4, _settings.point.size, _settings.point.size);
+            _ctx.fillRect(_centerX + Math.round(x*_settings.unitPixels) -4 , _centerY - Math.round(y*_settings.unitPixels)-4, _settings.point.size, _settings.point.size);
             _ctx.fillStyle = oldFill
         }
 
         function _joinPoints(p1, p2) {
-            var p1x = _centerX - Math.round(p1.x*_settings.unitPixels)
+            var p1x = _centerX + Math.round(p1.x*_settings.unitPixels)
             var p1y = _centerY - Math.round(p1.y*_settings.unitPixels)
-            var p2x = _centerX - Math.round(p2.x*_settings.unitPixels)
+            var p2x = _centerX + Math.round(p2.x*_settings.unitPixels)
             var p2y = _centerY - Math.round(p2.y*_settings.unitPixels)
 
             var prevStyle = _ctx.strokeStyle
