@@ -155,7 +155,7 @@ var pfCalc = (function(){
             var p1x = _centerX - Math.round(p1.x*_settings.unitPixels)
             var p1y = _centerY - Math.round(p1.y*_settings.unitPixels)
             var p2x = _centerX - Math.round(p2.x*_settings.unitPixels)
-            var p2y = _centerY - Math.round(p2.y*_settings.unitPixels)+
+            var p2y = _centerY - Math.round(p2.y*_settings.unitPixels)
 
             var prevStyle = _ctx.strokeStyle
             _ctx.beginPath();
