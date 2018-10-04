@@ -3,7 +3,7 @@ var pfCalc = (function(){
 
     var _loads = [];
     var _geometry = (function(){
-        class point {
+        class _point {
             constructor(x,y) {
                 this.x = x;
                 this.y = y;
