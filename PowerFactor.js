@@ -212,7 +212,7 @@ var pfCalc = (function(){
                 var prevX = prevLocation.x;
                 var prevY = prevLocation.y;
                 params.endLocation = new (_geom.point)(prevX + params.reactivePower, prevY + params.truePower);
-            } else if (hasApparentPower &&  && hasPhaseAngle) {
+            } else if (hasApparentPower && hasPhaseAngle) {
 
             }
         }
