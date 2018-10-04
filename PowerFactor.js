@@ -313,7 +313,7 @@ var pfCalc = (function() {
                     return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive & true power
                 },
                 function() {
-                    this.params.values.endLocation = new (_geom.point)(this.params.prevX + this.params.values.reactivePower, this.params.prevY + this.params.values.truePower);
+                    this.params.values.endLocation = new (_geom.point)(this.params.prevX + this.params.values.truePower, this.params.prevY + this.params.values.reactivePower);
                 }
             ), new _calculation(    'Ratio of true power and reactive power to get power factor', 
                 params,
