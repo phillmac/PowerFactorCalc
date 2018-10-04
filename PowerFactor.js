@@ -48,7 +48,7 @@ var pfCalc = (function() {
             _settings    = params
 
             _canvas = d3.select("canvas").call(d3.zoom().scaleExtent([1, 8]).on("zoom", _zoom));
-            _ctx = canvas.node().getContext("2d");
+            _ctx = _canvas.node().getContext("2d");
             _ctxWidth    = _canvas.property('width');
             _ctxHeight   = _canvas.property('height');
             _centerX     = _ctxWidth/2;
