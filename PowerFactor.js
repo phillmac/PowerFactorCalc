@@ -323,7 +323,7 @@ var pfCalc = (function(){
         );
     
         _plane.drawPoint(newLoad.endLocation);
-        _plane.joinPoints(params.prevLocation, newLocation);
+        _plane.joinPoints(params.prevLocation, newLoad.endLocation);
 
         _loads.push(newLoad);
 
