@@ -1,8 +1,8 @@
-var pfCalc = (function(){
+var pfCalc = (function() {
     var _settings;
 
     var _loads = [];
-    var _geometry = (function(){
+    var _geometry = (function() {
         class _point {
             constructor(x,y) {
                 this.x = x;
@@ -31,7 +31,7 @@ var pfCalc = (function(){
             line: _line
         }
     })
-    var cartesianPlane = ( function (){
+    var cartesianPlane = ( function () {
         var _canvas
         var _ctx
         var _ctxWidth
@@ -40,33 +40,46 @@ var pfCalc = (function(){
         var _centerY
         var _settings
         var _origin = new (_geom.point)(0,0)
+        var _points = [];
+        var _lines = [];
 
+        
         function _init(params) {
             _settings    = params
-            _canvas      = document.getElementById(_settings.canvasID);
-            _ctx         = _canvas.getContext('2d');
-            _ctxWidth    = _canvas.getAttribute('width');
-            _ctxHeight   = _canvas.getAttribute('height');
+
+            _canvas = d3.select("canvas").call(d3.zoom().scaleExtent([1, 8]).on("zoom", zoom)),
+            _ctx = canvas.node().getContext("2d"),
+            _ctxWidth    = _canvas.property('width');
+            _ctxHeight   = _canvas.property('height');
             _centerX     = _ctxWidth/2;
             _centerY     = _ctxHeight/2;
             unitPixels  = _settings.unitPixels;
             
-            if (_settings.draw.xAxis){
+            _drawScalesAxies()
+
+            if (_settings.draw.origin) {
+                _addPoint(_origin);
+            }
+
+        }
+
+        function _drawScalesAxies() {
+            if (_settings.draw.xAxis) {
                 _drawXAxis(_ctxWidth, _ctxHeight);
             }
-            if (_settings.draw.xScale){
+            if (_settings.draw.xScale) {
                 _drawXScale(_ctxWidth,_settings.unitPixels);
             }
             if (_settings.draw.yAxis) {
                 _drawYAxis(_ctxWidth, _ctxHeight);
             }
-            if (_settings.draw.yScale){
+            if (_settings.draw.yScale) {
                 _drawYScale(_ctxHeight, _settings.unitPixels);
             }
-            if (_settings.draw.origin){
-                _drawPoint(_origin)
-            }
         }
+            
+            
+    
 
         /*
         This function draws the x-axis to the context
@@ -140,6 +153,16 @@ var pfCalc = (function(){
             }
         }
 
+        function _addPoint(p){
+            _points.push(p);
+            _drawPoint(p)
+        }
+
+        function _addLine(l) {
+            _lines.push(l)
+            _drawLine(l)
+        }
+
         function _drawPoint(p){
             _drawPointXY(p.x, p.y)
         }
@@ -151,7 +174,7 @@ var pfCalc = (function(){
             _ctx.fillStyle = oldFill
         }
 
-        function _joinPoints(p1, p2) {
+        function _drawLine(p1, p2) {
             var p1x = _centerX + Math.round(p1.x*_settings.unitPixels)
             var p1y = _centerY - Math.round(p1.y*_settings.unitPixels)
             var p2x = _centerX + Math.round(p2.x*_settings.unitPixels)
@@ -170,6 +193,26 @@ var pfCalc = (function(){
             _ctx.strokeStyle = prevStyle
         }
 
+        function _draw() {
+            _drawScalesAxies()
+            _points.forEach(function(p){
+                _drawPoint(p);
+            });
+            _lines.forEach(function(l){
+                _drawLine(l);
+            });
+        }
+
+        function _zoom() {
+            var transform = d3.event.transform;
+            context.save();
+            context.clearRect(0, 0, _ctxWidth, _ctxHeight);
+            context.translate(transform.x, transform.y);
+            context.scale(transform.k, transform.k);
+            _draw();
+            context.restore();
+          }
+
         return {
             init: _init,
             ctx: _ctx,
@@ -177,8 +220,11 @@ var pfCalc = (function(){
             ctxHeight: _ctxHeight,
             centerX: _centerX,
             centerY: _centerY,
+            addPoint: _addPoint,
             drawPoint: _drawPoint,
-            joinPoints: _joinPoints
+            addLine: _addLine,
+            drawLine: _drawLine,
+            draw: _draw
         }
     
     })
@@ -368,8 +414,8 @@ var pfCalc = (function(){
             params.values.endLocation
         );
     
-        _plane.drawPoint(newLoad.endLocation);
-        _plane.joinPoints(params.prevLocation, newLoad.endLocation);
+        _plane.addPoint(newLoad.endLocation);
+        _plane.addLine(params.prevLocation, newLoad.endLocation);
 
         _loads.push(newLoad);
 
