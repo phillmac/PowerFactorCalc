@@ -253,7 +253,7 @@ var pfCalc = (function(){
                     return !this.params.hasLocation();
                 },
                 function() {
-                    return this.params.hasReactivePower() && this.params.hasTruePower()
+                    return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive power & true power
                 },
                 function() {
                     this.params.values.endLocation = new (_geom.point)(this.prevX + values.reactivePower, this.prevY + values.truePower);
@@ -305,13 +305,13 @@ var pfCalc = (function(){
             }
         } */
 
-        // console.log({
-        //     'hasApparentPower': hasApparentPower,
-        //     'hasReactivePower': hasReactivePower,
-        //     'hasTruePower': hasTruePower,
-        //     'hasPhaseAngle': hasPhaseAngle,
-        //     'hasLocation': hasLocation
-        // })
+        console.log({
+            'hasApparentPower': params.hasApparentPower(),
+            'hasReactivePower': params.hasReactivePower(),
+            'hasTruePower': prams.hasTruePower(),
+            'hasPhaseAngle': prams.hasPhaseAngle(),
+            'hasLocation': prams.hasLocation()
+        })
 
         
         var newLoad = new _load(
