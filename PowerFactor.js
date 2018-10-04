@@ -382,7 +382,7 @@ var pfCalc = (function(){
             _plane.init(_settings.plane);
         }
 
-        _loads.push(new _load(0.0, 0.0, 0.0, 0.0, new (_geom.point)(0,0)))
+        _loads.push(new _load(0.0, 0.0, 0.0, 0.0, 0.0, new (_geom.point)(0,0)))
 
     }
 
