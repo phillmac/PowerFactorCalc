@@ -274,7 +274,7 @@ var pfCalc = (function(){
                 function() {
                     this.params.values.powerFactor = this.params.values.reactivePower/this.params.values.truePower;
                 }
-            ), /* new _calculation(    'Atan to get phase angle from power factor',
+            ), new _calculation(    'Atan to get phase angle from power factor',
                 params,
                 function() {
                     return !this.params.hasPhaseAngle();
@@ -285,7 +285,7 @@ var pfCalc = (function(){
                 function() {
                     this.params.values.phaseAngle = Math.atan(this.params.values.powerFactor) * (180/Math.PI);
                 }
-            ), */
+            ),
         ]
     }
 
