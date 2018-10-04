@@ -154,13 +154,14 @@ var pfCalc = (function() {
         }
 
         function _addPoint(p){
+            _drawPoint(p);
             _points.push(p);
-            _drawPoint(p)
         }
 
         function _addLine(l) {
-            _lines.push(l)
-            _drawLine(l)
+            console.log(l);
+            _drawLine(l);
+            _lines.push(l);
         }
 
         function _drawPoint(p){
