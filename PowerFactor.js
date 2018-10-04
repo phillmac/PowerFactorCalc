@@ -256,7 +256,7 @@ var pfCalc = (function(){
                     return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive power & true power
                 },
                 function() {
-                    this.params.values.endLocation = new (_geom.point)(this.params.prevX + this.params.values.reactivePower, this.pramas.prevY + this.params.values.truePower);
+                    this.params.values.endLocation = new (_geom.point)(this.params.prevX + this.params.values.reactivePower, this.params.prevY + this.params.values.truePower);
                 }
             ),
         ]
