@@ -183,17 +183,19 @@ var pfCalc = (function() {
             var p2x = _centerX + Math.round(p2.x*_settings.unitPixels)
             var p2y = _centerY - Math.round(p2.y*_settings.unitPixels)
 
-            var prevStyle = _ctx.strokeStyle
+            var prevStyle = _ctx.strokeStyle;
+            var prevLinewidth =  _ctx.lineWidth;
             _ctx.beginPath();
 
-            _ctx.strokeStyle = _settings.line.color
-            _ctx.lineWidth = _settings.line.size
+            _ctx.strokeStyle = _settings.line.color;
+            _ctx.lineWidth = _settings.line.size;
             
             _ctx.moveTo(p1x, p1y);
             _ctx.lineTo(p2x, p2y);
             _ctx.stroke();
             
-            _ctx.strokeStyle = prevStyle
+            _ctx.strokeStyle = prevStyle;
+            _ctx.lineWidth = prevLinewidth;
         }
 
         function _draw() {
