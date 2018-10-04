@@ -222,6 +222,10 @@ var pfCalc = (function(){
             return !(typeof this.values.phaseAngle === "undefined");
         }
 
+        hasPowerFactor() {
+            return !(typeof this.values.powerFactor === "undefined");
+        }
+
         hasEndLocation() {
             return !(typeof this.values.endLocation === "undefined");
         }
@@ -261,13 +265,13 @@ var pfCalc = (function(){
             ), new _calculation(    //Trig to get phase angle
                 params,
                 function() {
-                    return !this.params.hasPhaseAngle();
+                    return !this.params.hasPowerFactor();
                 },
                 function() {
                     return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive power & true power
                 },
                 function() {
-                    this.params.values.phaseAngle = Math.tan(this.params.values.reactivePower/this.params.values.truePower);
+                    this.params.values.phaseAngle = this.params.values.reactivePower/this.params.values.truePower;
                 }
             ),
         ]
