@@ -321,7 +321,6 @@ var pfCalc = (function(){
             params.values.phaseAngle,
             params.values.endLocation
         );
-        var newLocation = newLoad.endLocation;
     
         _plane.drawPoint(newLoad.endLocation);
         _plane.joinPoints(params.prevLocation, newLocation);
