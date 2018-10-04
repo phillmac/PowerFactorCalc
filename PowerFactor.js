@@ -222,7 +222,7 @@ var pfCalc = (function(){
             return !(typeof this.values.phaseAngle === "undefined");
         }
 
-        hasendLocation() {
+        hasEndLocation() {
             return !(typeof this.values.endLocation === "undefined");
         }
     }
@@ -250,7 +250,7 @@ var pfCalc = (function(){
             new _calculation(    //Add values to get end location
                 params,
                 function() {
-                    return !this.params.hasLocation();
+                    return !this.params.hasEndLocation();
                 },
                 function() {
                     return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive power & true power
@@ -310,7 +310,7 @@ var pfCalc = (function(){
             'hasReactivePower': params.hasReactivePower(),
             'hasTruePower': prams.hasTruePower(),
             'hasPhaseAngle': prams.hasPhaseAngle(),
-            'hasLocation': prams.hasLocation()
+            'hasEndLocation': prams.hasEndLocation()
         })
 
         
