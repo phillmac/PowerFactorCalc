@@ -236,11 +236,11 @@ var pfCalc = (function(){
         }
 
         check() {
-            return this.trigger(params) && this.conditions(params)
+            return this.trigger(this.params) && this.conditions(this.params)
         }
 
         execute() {
-            this.method(params)
+            this.method(this.params)
         }
 
     }
