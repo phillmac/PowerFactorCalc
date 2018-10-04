@@ -298,12 +298,12 @@ var pfCalc = (function(){
         
         do {
             calcItem = calcList.find(function(clc){
-                console.log('Checking "' + clc.desc + '"')
+                //console.log('Checking "' + clc.desc + '"')
                 return clc.check()
             })
 
             if(calcItem){
-                console.log('Running "' + calcItem.desc + '"')
+                //console.log('Running "' + calcItem.desc + '"')
                 calcItem.method()
             }
         }
