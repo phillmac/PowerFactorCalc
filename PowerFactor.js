@@ -302,7 +302,7 @@ var pfCalc = (function(){
             })
 
             if(calcItem){
-                console.log('Running "' + clc.desc + '"')
+                console.log('Running "' + calcItem.desc + '"')
                 calcItem.method()
             }
         }
