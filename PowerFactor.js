@@ -11,7 +11,7 @@ var pfCalc = (function(){
     
         }
     
-        class line {
+        class _line {
             constructor(p1,p2) {
                 this.p1 = p1;
                 this.p2 = p2;
@@ -27,8 +27,8 @@ var pfCalc = (function(){
     
         }
         return {
-            point: point,
-            line: line
+            point: _point,
+            line: _line
         }
     })
     var cartesianPlane = ( function (){
