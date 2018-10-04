@@ -187,10 +187,11 @@ var pfCalc = (function(){
     var _plane = cartesianPlane();
 
     class _load {
-        constructor(apparentPower, truePower, reactivePower, phaseAngle, endLocation){
+        constructor(apparentPower, truePower, reactivePower, powerFactor, phaseAngle, endLocation){
             this.apparentPower = apparentPower;
             this.truePower = truePower;
             this.reactivePower = reactivePower;
+            this.powerFactor = powerFactor
             this.phaseAngle = phaseAngle;
             this.endLocation = endLocation;
         }
@@ -348,6 +349,7 @@ var pfCalc = (function(){
             params.values.apparentPower,
             params.values.truePower,
             params.values.reactivePower,
+            params.values.powerFactor,
             params.values.phaseAngle,
             params.values.endLocation
         );
