@@ -258,6 +258,17 @@ var pfCalc = (function(){
                 function() {
                     this.params.values.endLocation = new (_geom.point)(this.params.prevX + this.params.values.reactivePower, this.params.prevY + this.params.values.truePower);
                 }
+            ), new _calculation(    //Trig to get phase angle
+                params,
+                function() {
+                    return !this.params.hasPhaseAngle();
+                },
+                function() {
+                    return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive power & true power
+                },
+                function() {
+                    this.params.values.phaseAngle = Math.tan(this.params.values.reactivePower/this.params.values.truePower);
+                }
             ),
         ]
     }
