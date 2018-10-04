@@ -205,12 +205,12 @@ var pfCalc = (function() {
 
         function _zoom() {
             var transform = d3.event.transform;
-            context.save();
-            context.clearRect(0, 0, _ctxWidth, _ctxHeight);
-            context.translate(transform.x, transform.y);
-            context.scale(transform.k, transform.k);
+            _ctx.save();
+            _ctx.clearRect(0, 0, _ctxWidth, _ctxHeight);
+            _ctx.translate(transform.x, transform.y);
+            _ctx.scale(transform.k, transform.k);
             _draw();
-            context.restore();
+            _ctx.restore();
           }
 
         return {
