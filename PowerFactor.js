@@ -418,7 +418,7 @@ var pfCalc = (function() {
         );
     
         _plane.addPoint(newLoad.endLocation);
-        _plane.addLine(new (_geom.line)(pointparams.prevLocation, newLoad.endLocation));
+        _plane.addLine(new (_geom.line)(params.prevLocation, newLoad.endLocation));
 
         _loads.push(newLoad);
 
