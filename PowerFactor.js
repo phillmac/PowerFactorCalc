@@ -175,7 +175,9 @@ var pfCalc = (function() {
             _ctx.fillStyle = oldFill
         }
 
-        function _drawLine(p1, p2) {
+        function _drawLine(l) {
+            var p1 = l.p1
+            var p2 = l.p2
             var p1x = _centerX + Math.round(p1.x*_settings.unitPixels)
             var p1y = _centerY - Math.round(p1.y*_settings.unitPixels)
             var p2x = _centerX + Math.round(p2.x*_settings.unitPixels)
@@ -416,7 +418,7 @@ var pfCalc = (function() {
         );
     
         _plane.addPoint(newLoad.endLocation);
-        _plane.addLine(params.prevLocation, newLoad.endLocation);
+        _plane.addLine(new (_geom.line)(pointparams.prevLocation, newLoad.endLocation));
 
         _loads.push(newLoad);
 
