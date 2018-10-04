@@ -283,7 +283,7 @@ var pfCalc = (function(){
                     return this.params.hasPowerFactor()  //Require power factor
                 },
                 function() {
-                    this.params.values.phaseAngle = Math.atan(this.params.values.powerFactor) * (108/Math.PI);
+                    this.params.values.phaseAngle = Math.atan(this.params.values.powerFactor) * (180/Math.PI);
                 }
             ),
         ]
