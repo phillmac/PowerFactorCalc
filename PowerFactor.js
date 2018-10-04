@@ -232,7 +232,8 @@ var pfCalc = (function(){
     }
 
     class _calculation {
-        constructor(params, trigger, conditions, method) {
+        constructor(desc, params, trigger, conditions, method) {
+            this.desc = desc;
             this.params = params;
             this.trigger = trigger;
             this.conditions = conditions;
@@ -251,7 +252,7 @@ var pfCalc = (function(){
 
     function getCalcList(params) {
         return [
-            new _calculation(    //Add values to get end location
+            new _calculation(    'Add true power and reactive power values to get end location',
                 params,
                 function() {
                     return !this.params.hasEndLocation();
@@ -262,18 +263,7 @@ var pfCalc = (function(){
                 function() {
                     this.params.values.endLocation = new (_geom.point)(this.params.prevX + this.params.values.reactivePower, this.params.prevY + this.params.values.truePower);
                 }
-            ), new _calculation(    //Raio to get power factor
-                params,
-                function() {
-                    return !this.params.hasPowerFactor();
-                },
-                function() {
-                    return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive power & true power
-                },
-                function() {
-                    this.params.values.phaseAngle = this.params.values.reactivePower/this.params.values.truePower;
-                }
-            ), new _calculation(    //ratio to get phase angle
+            ), new _calculation(    'Ratio of true power and reactive power to get power factor', 
                 params,
                 function() {
                     return !this.params.hasPowerFactor();
@@ -283,6 +273,17 @@ var pfCalc = (function(){
                 },
                 function() {
                     this.params.values.powerFactor = this.params.values.reactivePower/this.params.values.truePower;
+                }
+            ), new _calculation(    'Atan to get phase angle from power factor',
+                params,
+                function() {
+                    return !this.params.hasPhaseAngle();
+                },
+                function() {
+                    return this.params.hasPowerFactor()  //Require power factor
+                },
+                function() {
+                    this.params.values.phaseAngle = Math.atan(this.params.values.powerFactor) * (108/Math.PI);
                 }
             ),
         ]
@@ -296,10 +297,12 @@ var pfCalc = (function(){
         
         do {
             calcItem = calcList.find(function(clc){
+                console.log('Checking "' + clc.desc + '"')
                 return clc.check()
             })
 
             if(calcItem){
+                console.log('Running "' + clc.desc + '"')
                 calcItem.method()
             }
         }
