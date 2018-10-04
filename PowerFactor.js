@@ -308,9 +308,9 @@ var pfCalc = (function(){
         console.log({
             'hasApparentPower': params.hasApparentPower(),
             'hasReactivePower': params.hasReactivePower(),
-            'hasTruePower': prams.hasTruePower(),
-            'hasPhaseAngle': prams.hasPhaseAngle(),
-            'hasEndLocation': prams.hasEndLocation()
+            'hasTruePower': params.hasTruePower(),
+            'hasPhaseAngle': params.hasPhaseAngle(),
+            'hasEndLocation': params.hasEndLocation()
         })
 
         
