@@ -324,7 +324,7 @@ var pfCalc = (function(){
         var newLocation = newLoad.endLocation;
     
         _plane.drawPoint(newLoad.endLocation);
-        _plane.joinPoints(prevLocation, newLocation);
+        _plane.joinPoints(params.prevLocation, newLocation);
 
         _loads.push(newLoad);
 
