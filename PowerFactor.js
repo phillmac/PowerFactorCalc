@@ -200,9 +200,9 @@ var pfCalc = (function(){
         constructor(values, prevLoad) {
             this.values = values;
             this.prevLoad = prevLoad;
-            this.prevLocation = prevLoad.endLocation;
-            this.prevX = prevLocation.x;
-            this.prevY = prevLocation.y;
+            this.prevLocation = this.prevLoad.endLocation;
+            this.prevX = this.prevLocation.x;
+            this.prevY = this.prevLocation.y;
 
         }
 
