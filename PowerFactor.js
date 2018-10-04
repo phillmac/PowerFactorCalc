@@ -218,11 +218,11 @@ var pfCalc = (function() {
 
         return {
             init: _init,
-            ctx: _ctx,
-            ctxWidth: _ctxWidth,
-            ctxHeight: _ctxHeight,
-            centerX: _centerX,
-            centerY: _centerY,
+            getCtx: function() { return _ctx },
+            getCtxWidth: function() { return _ctxWidth },
+            getCtxHeight: function() { return _ctxHeight },
+            getCenterX: function() { return _centerX },
+            getCenterY: function() { return _centerY },
             addPoint: _addPoint,
             drawPoint: _drawPoint,
             addLine: _addLine,
