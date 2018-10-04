@@ -218,9 +218,9 @@ var pfCalc = (function() {
 
         return {
             init: _init,
-            getCtx: function() { return _ctx },
-            getCtxWidth: function() { return _ctxWidth },
-            getCtxHeight: function() { return _ctxHeight },
+            getCTX: function() { return _ctx },
+            getCTXWidth: function() { return _ctxWidth },
+            getCTXHeight: function() { return _ctxHeight },
             getCenterX: function() { return _centerX },
             getCenterY: function() { return _centerY },
             addPoint: _addPoint,
