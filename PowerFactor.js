@@ -262,7 +262,7 @@ var pfCalc = (function(){
                 function() {
                     this.params.values.endLocation = new (_geom.point)(this.params.prevX + this.params.values.reactivePower, this.params.prevY + this.params.values.truePower);
                 }
-            ), new _calculation(    //Trig to get phase angle
+            ), new _calculation(    //Raio to get power factor
                 params,
                 function() {
                     return !this.params.hasPowerFactor();
@@ -272,6 +272,17 @@ var pfCalc = (function(){
                 },
                 function() {
                     this.params.values.phaseAngle = this.params.values.reactivePower/this.params.values.truePower;
+                }
+            ), new _calculation(    //ratio to get phase angle
+                params,
+                function() {
+                    return !this.params.hasPowerFactor();
+                },
+                function() {
+                    return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive power & true power
+                },
+                function() {
+                    this.params.values.powerFactor = this.params.values.reactivePower/this.params.values.truePower;
                 }
             ),
         ]
@@ -325,6 +336,7 @@ var pfCalc = (function(){
             'hasReactivePower': params.hasReactivePower(),
             'hasTruePower': params.hasTruePower(),
             'hasPhaseAngle': params.hasPhaseAngle(),
+            'hasPowerFactor': params.hasPowerFactor(),
             'hasEndLocation': params.hasEndLocation()
         })
 
