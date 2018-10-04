@@ -196,32 +196,114 @@ var pfCalc = (function(){
         }
     }
 
-    var _appendLoad = (function(params){
+    class _params {
+        constructor(values, prevLoad) {
+            this.values = values;
+            this.prevLoad = prevLoad;
+            this.prevLocation = prevLoad.endLocation;
+            this.prevX = prevLocation.x;
+            this.prevY = prevLocation.y;
 
-        var hasApparentPower = !(typeof params.apparentPower === "undefined");
-        var hasReactivePower = !(typeof params.reactivePower === "undefined");
-        var hasTruePower     = !(typeof params.truePower === "undefined");
-        var hasPhaseAngle    = !(typeof params.phaseAngle === "undefined");
-        var hasLocation      = !(typeof params.endLocation === "undefined");
+        }
 
-        var prevLoad = _loads[_loads.length -1];
-        var prevLocation = prevLoad.endLocation;
+        hasApparentPower() {
+            return !(typeof this.values.apparentPower === "undefined");
+        }
 
-        if (!hasLocation) {
+        hasReactivePower() {
+            return !(typeof this.values.reactivePower === "undefined");
+        }
+
+        hasTruePower() {
+            return !(typeof this.values.truePower === "undefined");
+        }
+
+        hasPhaseAngle() {
+            return !(typeof this.values.phaseAngle === "undefined");
+        }
+
+        hasendLocation() {
+            return !(typeof this.values.endLocation === "undefined");
+        }
+    }
+
+    class _calculation {
+        constructor(params, trigger, conditions, method) {
+            this.params = params;
+            this.trigger = trigger;
+            this.conditions = conditions;
+            this.method = method;
+        }
+
+        check() {
+            return trigger(params) && conditions(params)
+        }
+
+        execute() {
+            this.method(params)
+        }
+
+    }
+
+    function getCalcList(params) {
+        return [
+            new _calculation(    //Add values to get end location
+                params,
+                function() {
+                    return !this.params.hasLocation();
+                },
+                function() {
+                    return this.params.hasReactivePower() && this.params.hasTruePower()
+                },
+                function() {
+                    this.params.values.endLocation = new (_geom.point)(this.prevX + values.reactivePower, this.prevY + values.truePower);
+                }
+            ),
+        ]
+    }
+
+    var _appendLoad = (function(values){
+
+        var params = new _params(values, _loads[_loads.length -1]);
+        var calcList = getCalcList(params);
+        var calcItem;
+        
+        do {
+            calcItem = calcList.find(function(clc){
+                return clc.check()
+            })
+
+            if(calcItem){
+                calcItem.method()
+            }
+        }
+        while (calcItem);
+
+        
+
+        
+
+        /* if (!hasLocation) {
             if(hasReactivePower && hasTruePower) {
                 var prevX = prevLocation.x;
                 var prevY = prevLocation.y;
-                params.endLocation = new (_geom.point)(prevX + params.reactivePower, prevY + params.truePower);
+                values.endLocation = new (_geom.point)(prevX + values.reactivePower, prevY + values.truePower);
+                hasLocation = true;
             } else if (hasApparentPower && hasPhaseAngle) {
 
             }
         }
 
+        line = new geom.line(prevLocation, endLocation)
+        
         if (!hasApparentPower) {
-            if(hasReactivePower && hasTruePower) {
+            if (hasLocation) {
+                values.apparentPower = line.length();
+        }
+        } else if(hasReactivePower && hasTruePower) {
 
             }
-        }
+        } */
 
         // console.log({
         //     'hasApparentPower': hasApparentPower,
@@ -232,7 +314,13 @@ var pfCalc = (function(){
         // })
 
         
-        var newLoad = new _load(params.apparentPower, params.truePower, params.reactivePower, params.phaseAngle, params.endLocation);
+        var newLoad = new _load(
+            params.values.apparentPower,
+            params.values.truePower,
+            params.values.reactivePower,
+            params.values.phaseAngle,
+            params.values.endLocation
+        );
         var newLocation = newLoad.endLocation;
     
         _plane.drawPoint(newLoad.endLocation);
