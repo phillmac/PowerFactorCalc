@@ -307,7 +307,7 @@ var pfCalc = (function() {
             new _calculation(    'Add true power and reactive power values to get end location',
                 params,
                 function() {
-                    return !this.params.hasEndLocation();
+                    return !this.params.hasEndLocation(); //End coords missing
                 },
                 function() {
                     return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive & true power
@@ -315,10 +315,10 @@ var pfCalc = (function() {
                 function() {
                     this.params.values.endLocation = new (_geom.point)(this.params.prevX + this.params.values.truePower, this.params.prevY + this.params.values.reactivePower);
                 }
-            ), new _calculation(    'Ratio of true power and reactive power to get power factor', 
+            ), new _calculation(    'Divide true and reactive power to get power factor ratio', 
                 params,
                 function() {
-                    return !this.params.hasPowerFactor();
+                    return !this.params.hasPowerFactor(); //Power factor missing
                 },
                 function() {
                     return this.params.hasReactivePower() && this.params.hasTruePower()  //Require reactive & true power
@@ -326,29 +326,50 @@ var pfCalc = (function() {
                 function() {
                     this.params.values.powerFactor = this.params.values.reactivePower/this.params.values.truePower;
                 }
-            ), new _calculation(    'ATan to get phase angle from power factor',
+            ), new _calculation(    'Tan to get phase angle from power factor',
                 params,
                 function() {
-                    return !this.params.hasPhaseAngle();
+                    return !this.params.hasPowerFactor();  //Power factor missing
                 },
                 function() {
-                    return this.params.hasPowerFactor()  //Require power factor
+                    return this.params.hasPhaseAngle()  //Require phase angle
                 },
                 function() {
-                    this.params.values.phaseAngle = Math.atan(this.params.values.powerFactor) * (180/Math.PI);
+                    switch (true) { //Override stupid javascript behavior
+                        case ([45,225].includes(this.params.values.phaseAngle)):   //Stupid javascript precision
+                            this.params.values.powerFactor = 1;   //tan(45) & tan(225) = 0.9999999999999999
+                            break;
+                        case ([0,360].includes(this.params.values.phaseAngle)):   //360 gives weird results, override 0 as well to be sure
+                            this.params.values.powerFactor = 0;
+                            break;
+                        default:
+                            this.params.values.powerFactor = Math.tan(this.params.values.phaseAngle * (Math.PI/180)); //Stupid radians math                    }
+                        
+                    }
                 }
             ), new _calculation(    'Pythagoras to get apparent power from true & reactive',
                 params,
                 function() {
-                    return !this.params.hasApparentPower();
+                    return !this.params.hasApparentPower(); //Apparent power missing
                 },
                 function() {
                     return this.params.hasReactivePower() && this.params.hasTruePower();  //Require reactive & true power
                 },
-                function() {
+                function() { //Pythagoras
                     this.params.values.apparentPower = Math.sqrt(Math.pow(this.params.values.reactivePower, 2) + Math.pow(this.params.values.truePower, 2));
                 }
-             ),
+            ), new _calculation(    'Mutiply power factor with true to get reactive power',
+                params,
+                function() {
+                    return !this.params.hasReactivePower(); //Reactive power missing
+                },
+                function() {
+                    return this.params.hasPowerFactor() && this.params.hasTruePower();  //Require power factor & true power
+                },
+                function() { //Multiplication
+                    this.params.values.reactivePower = this.params.values.truePower * this.params.values.powerFactor;
+                }
+            ),
         ]
     }
 
@@ -368,7 +389,7 @@ var pfCalc = (function() {
             })
 
             if(calcItem){
-                //console.log('Running "' + calcItem.desc + '"')
+                console.log('Running "' + calcItem.desc + '"')
                 calcItem.method()
             }
         }
