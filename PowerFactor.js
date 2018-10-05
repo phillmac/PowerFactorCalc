@@ -326,7 +326,18 @@ var pfCalc = (function() {
                 function() {
                     this.params.values.powerFactor = this.params.values.reactivePower/this.params.values.truePower;
                 }
-            ), new _calculation(    'Tan to get phase angle from power factor',
+            ), new _calculation(    'ATan to get phase angle from power factor',
+                params,
+                function() {
+                    return !this.params.hasPhaseAngle();
+                },
+                function() {
+                    return this.params.hasPowerFactor()  //Require power factor
+                },
+                function() {
+                    this.params.values.phaseAngle = Math.atan(this.params.values.powerFactor) * (180/Math.PI); //Stupid radians math
+                }
+            ),  new _calculation(    'Tan to get phase angle from power factor',
                 params,
                 function() {
                     return !this.params.hasPowerFactor();  //Power factor missing
