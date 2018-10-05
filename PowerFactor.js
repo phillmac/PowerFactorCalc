@@ -380,7 +380,7 @@ var pfCalc = (function() {
             case ([45,225, -315, -135].includes(angle)):   //Stupid javascript precision
                 return  1;   //tan(45) & tan(225) = 0.9999999999999999
             case ([-45,-225, 315, 135].includes(angle)):   //Stupid javascript precision
-                return  -1;   //tan(-45) & tan(-225) = 0.9999999999999999
+                return  -1;   //tan(-45) & tan(-225) = -0.9999999999999999
             case ([0,360].includes(angle)):   //360 gives weird results, override 0 as well to be sure
                 return  0;
             default:
