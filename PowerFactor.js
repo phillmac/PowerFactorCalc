@@ -369,21 +369,34 @@ var pfCalc = (function() {
                 function() { //Pythagoras
                     this.params.values.apparentPower = Math.sqrt(Math.pow(this.params.values.reactivePower, 2) + Math.pow(this.params.values.truePower, 2));
                 }
-            ), new _calculation(    'Mutiply power factor with true to get reactive power',
+            ), new _calculation(    'Tan phase angle with true to get reactive power',
                 params,
                 function() {
                     return !this.params.hasReactivePower(); //Reactive power missing
                 },
                 function() {
-                    return this.params.hasPowerFactor() && this.params.hasTruePower();  //Require power factor & true power
+                    return this.params.hasPhaseAngle() && this.params.hasTruePower();  //Require phase angle & true power
                 },
-                function() { //Multiplication
-                    this.params.values.reactivePower = this.params.values.truePower * this.params.values.powerFactor;
+                function() { //Tan
+                    this.params.values.reactivePower = this.params.values.truePower * betterTan(this.params.values.phaseAngle); //Stupid radians math 
                 }
             ),
         ]
     }
 
+
+    function betterTan(angle) { //Override stupid javascript behaviors
+        switch (true) { 
+            case ([45,225, -315, -135].includes(angle)):   //Stupid javascript precision
+                return  1;   //tan(45) & tan(225) = 0.9999999999999999
+            case ([-45,-225, 315, 135].includes(angle)):   //Stupid javascript precision
+                return  -1;   //tan(-45) & tan(-225) = 0.9999999999999999
+            case ([0,360].includes(angle)):   //360 gives weird results, override 0 as well to be sure
+                return  0;
+            default:
+                return Math.tan(angle * (Math.PI/180)); //Stupid radians math                    }
+        }
+    }
 
     
 
