@@ -412,7 +412,7 @@ var pfCalc = (function() {
 
         var params = new _params(values, _loads[_loads.length -1]);
         var calcList = getCalcList(params);
-        var satisfiedCalcs;
+        var satisfsatisfiableCalcsiedCalcs;
         
         do {
             satisfiableCalcs = calcList.filter(function(calc){
@@ -420,7 +420,7 @@ var pfCalc = (function() {
                 return calc.check();
             })
 
-            calcsAvailable = (satisfiedCalcs.length > 0);
+            calcsAvailable = (satisfiableCalcs.length > 0);
 
             if(calcsAvailable){
                 satisfiableCalcs.forEach(function(calc){
@@ -436,16 +436,7 @@ var pfCalc = (function() {
 
         
 
-        /* if (!hasLocation) {
-            if(hasReactivePower && hasTruePower) {
-                var prevX = prevLocation.x;
-                var prevY = prevLocation.y;
-                values.endLocation = new (_geom.point)(prevX + values.reactivePower, prevY + values.truePower);
-                hasLocation = true;
-            } else if (hasApparentPower && hasPhaseAngle) {
-
-            }
-        }
+        /* 
 
         line = new geom.line(prevLocation, endLocation)
         
