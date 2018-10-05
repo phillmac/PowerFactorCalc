@@ -304,7 +304,7 @@ var pfCalc = (function() {
 
     function getCalcList(params) {
         return [
-            new _calculation(    'Add true power and reactive power values to get end location',
+            new _calculation(    'Coord geometry with true and reactive power values to get end location',
                 params,
                 function() {
                     return !this.params.hasEndLocation(); //End coords missing
