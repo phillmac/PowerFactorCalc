@@ -412,20 +412,25 @@ var pfCalc = (function() {
 
         var params = new _params(values, _loads[_loads.length -1]);
         var calcList = getCalcList(params);
-        var calcItem;
+        var satisfiedCalcs;
         
         do {
-            calcItem = calcList.find(function(clc){
-                //console.log('Checking "' + clc.desc + '"')
-                return clc.check()
+            satisfiableCalcs = calcList.filter(function(calc){
+                //console.log('Checking "' + calc.desc + '"');
+                return calc.check();
             })
 
-            if(calcItem){
-                console.log('Running "' + calcItem.desc + '"')
-                calcItem.method()
+            calcsAvailable = (satisfiedCalcs.length > 0);
+
+            if(calcsAvailable){
+                satisfiableCalcs.forEach(function(calc){
+                    console.log('Running "' + calc.desc + '"');
+                    calc.method();
+
+                })
             }
         }
-        while (calcItem);
+        while (calcsAvailable);
 
         
 
