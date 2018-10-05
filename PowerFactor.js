@@ -372,7 +372,7 @@ var pfCalc = (function() {
                     return !this.params.hasReactivePower(); //Reactive power missing
                 },
                 function() {
-                    return this.params.hasPhaseAngle() && this.params.hasApparentPower();  //Require phase angle & true power
+                    return this.params.hasPhaseAngle() && this.params.hasApparentPower();  //Require phase angle & apparent power
                 },
                 function() { //Sin
                     this.params.values.reactivePower = Math.sin(this.params.values.phaseAngle * (Math.PI/180)) * this.params.values.apparentPower; //Stupid radians math
@@ -383,10 +383,32 @@ var pfCalc = (function() {
                     return !this.params.hasTruePower(); //Reactive power missing
                 },
                 function() {
-                    return this.params.hasPhaseAngle() && this.params.hasApparentPower();  //Require phase angle & true power
+                    return this.params.hasPhaseAngle() && this.params.hasApparentPower();  //Require phase angle & apparent power
                 },
                 function() { //Sin
                     this.params.values.truePower = Math.cos(this.params.values.phaseAngle * (Math.PI/180)) * this.params.values.apparentPower; //Stupid radians math
+                }
+            ), new _calculation(    'Divide true & power factor to get apparent power',
+                params,
+                function() {
+                    return !this.params.hasApparentPower(); //Reactive power missing
+                },
+                function() {
+                    return this.params.hasPowerFactor() && this.params.hasTruePower();  //Require phase angle & true power
+                },
+                function() { //Sin
+                    this.params.values.apparentPower = this.params.values.truePower / this.values.powerFactor;
+                }
+            ), new _calculation(    'Multiply apparent & power factor to get true power',
+                params,
+                function() {
+                    return !this.params.hasTruePower(); //Reactive power missing
+                },
+                function() {
+                    return this.params.hasPowerFactor() && this.params.hasApparentPower();  //Require phase angle & true power
+                },
+                function() { //Sin
+                    this.params.values.truePower = this.params.values.apparentPower * this.values.powerFactor;
                 }
             ),
         ]
