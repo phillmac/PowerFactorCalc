@@ -342,7 +342,7 @@ var pfCalc = (function() {
                     return this.params.hasPhaseAngle()  //Require phase angle
                 },
                 function() {
-                   this.params.values.powerFactor = Math.cos(this.params.values.phaseAngle * (Math.PI/180)); //Stupid radians math                    }  
+                   this.params.values.powerFactor = Math.cos(this.params.values.phaseAngle * (Math.PI/180)); //Stupid radians math  
                 }
             ), new _calculation(    'Pythagoras to get apparent power from true & reactive',
                 params,
@@ -364,9 +364,20 @@ var pfCalc = (function() {
                     return this.params.hasPhaseAngle() && this.params.hasTruePower();  //Require phase angle & true power
                 },
                 function() { //Tan
-                    this.params.values.reactivePower = this.params.values.truePower * betterTan(this.params.values.phaseAngle); //Stupid javascript behavior 
+                    this.params.values.reactivePower = this.params.values.truePower * betterTan(this.params.values.phaseAngle); //Stupid javascript behavior
                 }
-            ),
+            ), new _calculation(    'Sin phase angle with apparent to get reactive power',
+            params,
+            function() {
+                return !this.params.hasReactivePower(); //Reactive power missing
+            },
+            function() {
+                return this.params.hasPhaseAngle() && this.params.hasApparentPower();  //Require phase angle & true power
+            },
+            function() { //Sin
+                this.params.values.reactivePower = Math.sin(this.params.values.phaseAngle * (Math.PI/180)) / this.params.values.apparentPower; //Stupid radians math
+            }
+        ),
         ]
     }
 
@@ -380,7 +391,7 @@ var pfCalc = (function() {
             case ([0,360].includes(angle)):   //360 gives weird results, override 0 as well to be sure
                 return  0;
             default:
-                return Math.tan(angle * (Math.PI/180)); //Stupid radians math                    }
+                return Math.tan(angle * (Math.PI/180)); //Stupid radians math
         }
     }
 
