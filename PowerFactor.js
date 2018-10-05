@@ -367,17 +367,28 @@ var pfCalc = (function() {
                     this.params.values.reactivePower = this.params.values.truePower * betterTan(this.params.values.phaseAngle); //Stupid javascript behavior
                 }
             ), new _calculation(    'Sin phase angle with apparent to get reactive power',
-            params,
-            function() {
-                return !this.params.hasReactivePower(); //Reactive power missing
-            },
-            function() {
-                return this.params.hasPhaseAngle() && this.params.hasApparentPower();  //Require phase angle & true power
-            },
-            function() { //Sin
-                this.params.values.reactivePower = Math.sin(this.params.values.phaseAngle * (Math.PI/180)) / this.params.values.apparentPower; //Stupid radians math
-            }
-        ),
+                params,
+                function() {
+                    return !this.params.hasReactivePower(); //Reactive power missing
+                },
+                function() {
+                    return this.params.hasPhaseAngle() && this.params.hasApparentPower();  //Require phase angle & true power
+                },
+                function() { //Sin
+                    this.params.values.reactivePower = Math.sin(this.params.values.phaseAngle * (Math.PI/180)) / this.params.values.apparentPower; //Stupid radians math
+                }
+            ), new _calculation(    'Sin phase angle with apparent to get reactive power',
+                params,
+                function() {
+                    return !this.params.hasTruePower(); //Reactive power missing
+                },
+                function() {
+                    return this.params.hasPhaseAngle() && this.params.hasApparentPower();  //Require phase angle & true power
+                },
+                function() { //Sin
+                    this.params.values.reactivePower = Math.cos(this.params.values.phaseAngle * (Math.PI/180)) / this.params.values.apparentPower; //Stupid radians math
+                }
+            ),
         ]
     }
 
