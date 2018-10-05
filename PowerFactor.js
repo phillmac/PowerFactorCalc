@@ -346,17 +346,7 @@ var pfCalc = (function() {
                     return this.params.hasPhaseAngle()  //Require phase angle
                 },
                 function() {
-                    /* switch (true) { //Override stupid javascript behavior
-                        case ([45,225].includes(this.params.values.phaseAngle)):   //Stupid javascript precision
-                            this.params.values.powerFactor = 1;   //tan(45) & tan(225) = 0.9999999999999999
-                            break;
-                        case ([0,360].includes(this.params.values.phaseAngle)):   //360 gives weird results, override 0 as well to be sure
-                            this.params.values.powerFactor = 0;
-                            break;
-                        default: */
-                            this.params.values.powerFactor = Math.cos(this.params.values.phaseAngle * (Math.PI/180)); //Stupid radians math                    }
-                        
-                    //}
+                   this.params.values.powerFactor = Math.cos(this.params.values.phaseAngle * (Math.PI/180)); //Stupid radians math                    }  
                 }
             ), new _calculation(    'Pythagoras to get apparent power from true & reactive',
                 params,
