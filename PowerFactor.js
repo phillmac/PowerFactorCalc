@@ -368,7 +368,7 @@ var pfCalc = (function() {
                     return this.params.hasPhaseAngle() && this.params.hasTruePower();  //Require phase angle & true power
                 },
                 function() { //Tan
-                    this.params.values.reactivePower = this.params.values.truePower * betterTan(this.params.values.phaseAngle); //Stupid radians math 
+                    this.params.values.reactivePower = this.params.values.truePower * betterTan(this.params.values.phaseAngle); //Stupid javascript behavior 
                 }
             ),
         ]
