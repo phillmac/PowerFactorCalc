@@ -385,7 +385,7 @@ var pfCalc = (function() {
                 function() {
                     return this.params.hasPhaseAngle() && this.params.hasApparentPower();  //Require phase angle & apparent power
                 },
-                function() { //Sin
+                function() { //Cos
                     this.params.values.truePower = Math.cos(this.params.values.phaseAngle * (Math.PI/180)) * this.params.values.apparentPower; //Stupid radians math
                 }
             ), new _calculation(    'Divide true & power factor to get apparent power',
@@ -396,7 +396,7 @@ var pfCalc = (function() {
                 function() {
                     return this.params.hasPowerFactor() && this.params.hasTruePower();  //Require phase angle & true power
                 },
-                function() { //Sin
+                function() { //Divide
                     this.params.values.apparentPower = this.params.values.truePower / this.values.powerFactor;
                 }
             ), new _calculation(    'Multiply apparent & power factor to get true power',
@@ -407,7 +407,7 @@ var pfCalc = (function() {
                 function() {
                     return this.params.hasPowerFactor() && this.params.hasApparentPower();  //Require phase angle & true power
                 },
-                function() { //Sin
+                function() { //Multiply
                     this.params.values.truePower = this.params.values.apparentPower * this.values.powerFactor;
                 }
             ),
