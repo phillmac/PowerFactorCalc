@@ -18,11 +18,7 @@ var pfCalc = (function() {
             }
 
             length() {
-                x1 = Math.round(p1.x);
-                y1 = Math.round(p1.y);
-                x2 = Math.round(p2.x);
-                y2 = Math.round(p2.y);
-                return Math.sqrt(Math.pow((this.x1 - this.x2),2) + Math.pow((this.y1 - this.y2),2))
+                return Math.sqrt(Math.pow((this.p1.x - this.p1.y),2) + Math.pow((this.p2.x - this.p2.y),2))
             }
     
         }
