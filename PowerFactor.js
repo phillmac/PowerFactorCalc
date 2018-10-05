@@ -412,7 +412,7 @@ var pfCalc = (function() {
 
         var params = new _params(values, _loads[_loads.length -1]);
         var calcList = getCalcList(params);
-        var satisfsatisfiableCalcsiedCalcs;
+        var satisfiableCalcs;
         
         do {
             satisfiableCalcs = calcList.filter(function(calc){
