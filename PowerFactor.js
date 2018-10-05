@@ -326,10 +326,10 @@ var pfCalc = (function() {
                 function() {
                     this.params.values.powerFactor = this.params.values.reactivePower/this.params.values.truePower;
                 }
-            ), new _calculation(    'ATan to get phase angle from power factor',
+            ), new _calculation(    'ArcTan to get phase angle from power factor',
                 params,
                 function() {
-                    return !this.params.hasPhaseAngle();
+                    return !this.params.hasPhaseAngle(); //Phase angle missing
                 },
                 function() {
                     return this.params.hasPowerFactor()  //Require power factor
