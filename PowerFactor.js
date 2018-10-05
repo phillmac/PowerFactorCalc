@@ -326,7 +326,7 @@ var pfCalc = (function() {
                 function() {
                     this.params.values.powerFactor = this.params.values.reactivePower/this.params.values.truePower;
                 }
-            ), new _calculation(    'ArcTan to get phase angle from power factor',
+            ), new _calculation(    'ArcCos to get phase angle from power factor',
                 params,
                 function() {
                     return !this.params.hasPhaseAngle(); //Phase angle missing
@@ -335,9 +335,9 @@ var pfCalc = (function() {
                     return this.params.hasPowerFactor()  //Require power factor
                 },
                 function() {
-                    this.params.values.phaseAngle = Math.atan(this.params.values.powerFactor) * (180/Math.PI); //Stupid radians math
+                    this.params.values.phaseAngle = Math.acos(this.params.values.powerFactor) * (180/Math.PI); //Stupid radians math
                 }
-            ),  new _calculation(    'Tan to get phase angle from power factor',
+            ),  new _calculation(    'Cos to get power factor from phase angle',
                 params,
                 function() {
                     return !this.params.hasPowerFactor();  //Power factor missing
@@ -346,17 +346,17 @@ var pfCalc = (function() {
                     return this.params.hasPhaseAngle()  //Require phase angle
                 },
                 function() {
-                    switch (true) { //Override stupid javascript behavior
+                    /* switch (true) { //Override stupid javascript behavior
                         case ([45,225].includes(this.params.values.phaseAngle)):   //Stupid javascript precision
                             this.params.values.powerFactor = 1;   //tan(45) & tan(225) = 0.9999999999999999
                             break;
                         case ([0,360].includes(this.params.values.phaseAngle)):   //360 gives weird results, override 0 as well to be sure
                             this.params.values.powerFactor = 0;
                             break;
-                        default:
+                        default: */
                             this.params.values.powerFactor = Math.cos(this.params.values.phaseAngle * (Math.PI/180)); //Stupid radians math                    }
                         
-                    }
+                    //}
                 }
             ), new _calculation(    'Pythagoras to get apparent power from true & reactive',
                 params,
