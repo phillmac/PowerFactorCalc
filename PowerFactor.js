@@ -377,7 +377,7 @@ var pfCalc = (function() {
                 function() { //Sin
                     this.params.values.reactivePower = Math.sin(this.params.values.phaseAngle * (Math.PI/180)) / this.params.values.apparentPower; //Stupid radians math
                 }
-            ), new _calculation(    'Sin phase angle with apparent to get reactive power',
+            ), new _calculation(    'Cos phase angle with apparent to get true power',
                 params,
                 function() {
                     return !this.params.hasTruePower(); //Reactive power missing
