@@ -354,7 +354,7 @@ var pfCalc = (function() {
                             this.params.values.powerFactor = 0;
                             break;
                         default:
-                            this.params.values.powerFactor = Math.tan(this.params.values.phaseAngle * (Math.PI/180)); //Stupid radians math                    }
+                            this.params.values.powerFactor = Math.cos(this.params.values.phaseAngle * (Math.PI/180)); //Stupid radians math                    }
                         
                     }
                 }
