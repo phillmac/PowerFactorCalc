@@ -386,7 +386,7 @@ var pfCalc = (function() {
                     return this.params.hasPhaseAngle() && this.params.hasApparentPower();  //Require phase angle & true power
                 },
                 function() { //Sin
-                    this.params.values.reactivePower = Math.cos(this.params.values.phaseAngle * (Math.PI/180)) / this.params.values.apparentPower; //Stupid radians math
+                    this.params.values.truePower = Math.cos(this.params.values.phaseAngle * (Math.PI/180)) / this.params.values.apparentPower; //Stupid radians math
                 }
             ),
         ]
