@@ -428,6 +428,11 @@ var pfCalc = (function() {
         }
     }
 
+    var _validateLoad = (function(values){
+        var params = new _params(values, _loads[_loads.length -1]);
+
+        return params
+    })
     
 
     var _appendLoad = (function(values){
